@@ -1,0 +1,5 @@
+{
+  "name": "Customer CRUD Prototype",
+  "description": "A rapid prototype for customer management using React, TypeScript and in-memory mock data.",
+  "requestFramePermissions": []
+}
