@@ -71,11 +71,10 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50 p-4 md:p-8">
       <div className="max-w-5xl mx-auto">
-        
+
         {/* Header */}
         <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Customer Management</h1>
-          <p className="text-gray-500 mt-1">Prototype v1.0 (Mock Data Mode)</p>
+          <h1 className="text-3xl font-bold text-gray-900">紙川CRM</h1>
         </header>
 
         {/* Content Area */}

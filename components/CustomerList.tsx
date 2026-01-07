@@ -18,7 +18,7 @@ const CustomerList: React.FC<CustomerListProps> = ({
     <div className="bg-white shadow rounded-lg border border-gray-200 overflow-hidden">
       {/* Header */}
       <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
-        <h2 className="text-lg font-semibold text-gray-800">Customers ({customers.length})</h2>
+        <h2 className="text-lg font-semibold text-gray-800">客戶資訊 ({customers.length})</h2>
         <button
           type="button"
           onClick={onCreate}
@@ -34,19 +34,19 @@ const CustomerList: React.FC<CustomerListProps> = ({
           <thead className="bg-gray-50">
             <tr>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Name
+                客戶名稱
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Group
+                客戶群組
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Balance
+                會員餘額
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Note
+                備註
               </th>
               <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
+                操作
               </th>
             </tr>
           </thead>
@@ -64,9 +64,8 @@ const CustomerList: React.FC<CustomerListProps> = ({
                     <div className="text-sm font-medium text-gray-900">{customer.name}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      customer.group_name ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-                    }`}>
+                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${customer.group_name ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                      }`}>
                       {customer.group_name || 'None'}
                     </span>
                   </td>
