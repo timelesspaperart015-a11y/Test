@@ -18,7 +18,7 @@ const CustomerList: React.FC<CustomerListProps> = ({
     <div className="bg-white shadow rounded-lg border border-gray-200 overflow-hidden">
       {/* Header */}
       <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
-        <h2 className="text-lg font-semibold text-gray-800">客戶資訊 ({customers.length})</h2>
+        <h2 className="text-lg font-semibold text-gray-800">Customer List ({customers.length})</h2>
         <button
           type="button"
           onClick={onCreate}
@@ -34,19 +34,19 @@ const CustomerList: React.FC<CustomerListProps> = ({
           <thead className="bg-gray-50">
             <tr>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                客戶名稱
+                Name
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                客戶群組
+                Group
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                會員餘額
+                Balance
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                備註
+                Note
               </th>
               <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                操作
+                Actions
               </th>
             </tr>
           </thead>
