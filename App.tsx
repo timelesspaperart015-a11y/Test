@@ -3,8 +3,13 @@ import { Customer, CustomerFormData } from './types';
 import { supabase } from './supabaseClient';
 import CustomerList from './components/CustomerList';
 import CustomerForm from './components/CustomerForm';
+import AuthUI from './components/AuthUI';
+import { Session } from '@supabase/supabase-js';
 
 function App() {
+  // State: Auth Session
+  const [session, setSession] = useState<Session | null>(null);
+
   // State: List of customers
   const [customers, setCustomers] = useState<Customer[]>([]);
 
@@ -15,8 +20,26 @@ function App() {
   const [editingCustomer, setEditingCustomer] = useState<Customer | null>(null);
 
   useEffect(() => {
-    fetchCustomers();
+    // 獲取初始 Session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // 監聽 Auth 狀態變化
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
+
+  useEffect(() => {
+    if (session) {
+      fetchCustomers();
+    }
+  }, [session]);
 
   const fetchCustomers = async () => {
     const { data, error } = await supabase
@@ -32,6 +55,10 @@ function App() {
   };
 
   // --- Actions ---
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+  };
 
   // Go to Create Mode
   const handleCreateClick = () => {
@@ -77,7 +104,7 @@ function App() {
         return;
       }
     } else {
-      // Create logic
+      // Create logic - Supabase RLS and default user_id will handle ownership
       const { error } = await supabase
         .from('customer')
         .insert([formData]);
@@ -101,13 +128,32 @@ function App() {
     setEditingCustomer(null);
   };
 
+  if (!session) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+        <AuthUI onSuccess={() => { }} />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 p-4 md:p-8">
       <div className="max-w-5xl mx-auto">
 
         {/* Header */}
-        <header className="mb-8">
+        <header className="mb-8 flex justify-between items-center">
           <h1 className="text-3xl font-bold text-gray-900">CRM</h1>
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-gray-600 hidden md:inline">
+              {session.user.email}
+            </span>
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+            >
+              登出
+            </button>
+          </div>
         </header>
 
         {/* Content Area */}
